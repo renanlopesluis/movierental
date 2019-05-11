@@ -1,6 +1,6 @@
 # Movie Rental 
 
-Este é um projeto de locadora de filmes baseado apenas em serviços.
+Este é um projeto de locadora de filmes baseado apenas em serviços para serem consumidos.
 
 **Características**
 <br/>
