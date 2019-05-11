@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +24,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value="Movies REST API")
-@CrossOrigin(origins="*")
-@RequestMapping(value="/api/private")
-public class MovieApi {
+public class MovieApi implements V1{
 	
 	private MovieService movieService;
 	private MovieDTOFactory movieDTOFactory;
@@ -39,7 +36,7 @@ public class MovieApi {
 		this.movieDTOFactory = movieDTOFactory;
 	}
 	
-	@RequestMapping(value="/movies", method=RequestMethod.GET)
+	@RequestMapping(value="/private/movies", method=RequestMethod.GET)
 	@GetMapping
 	@PreAuthorize("hasRole('USER')")
 	@ApiOperation(value="This method returns all available movies for a rental",  notes = "You must be logged on the api to execute this method.")
@@ -62,7 +59,7 @@ public class MovieApi {
 		}
 	}
 	
-	@RequestMapping(value="/movie", method=RequestMethod.GET)
+	@RequestMapping(value="/private/movie", method=RequestMethod.GET)
 	@GetMapping
 	@PreAuthorize("hasRole('USER')")
 	@ApiOperation(value="This method returns a movie by its name",  notes = "You must be logged on the api to execute this method.")

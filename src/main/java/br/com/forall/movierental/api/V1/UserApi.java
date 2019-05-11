@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value="Users REST API")
-@CrossOrigin(origins="*")
-@RequestMapping(value="/api")
-public class UserApi {
+public class UserApi implements V1{
 	
 	private UserService userService;
 	private LoginService loginService;
@@ -73,7 +70,7 @@ public class UserApi {
 	@RequestMapping(value = "/public/authentication", method = RequestMethod.POST)
 	@ApiOperation(value="This method executes the user logon", notes = "This method doesn't need authentication")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "User successfully authenticated!", response = String.class),
+			@ApiResponse(code = 200, message = "User successfully authenticated!", response = String.class)
 	})
 	@ApiImplicitParams({
         @ApiImplicitParam(
@@ -95,7 +92,7 @@ public class UserApi {
 	@RequestMapping(value = "/private/disconnection", method = RequestMethod.POST)
 	@ApiOperation(value="This method executes the user logout",  notes = "You must be logged on the api to execute this method.")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "User successfully disconnected!", response = String.class),
+			@ApiResponse(code = 200, message = "User successfully disconnected!", response = String.class)
 	})
 	public ResponseEntity<?> logout(){
 		try {

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,9 +27,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value="Rentals REST API")
-@CrossOrigin(origins="*")
-@RequestMapping(value="/api/private")
-public class RentalApi {
+public class RentalApi implements V1{
 
 	private RentalService rentalService;
 	private RentalDTOFactory rentalDTOFactory;
@@ -41,7 +38,7 @@ public class RentalApi {
 		this.rentalDTOFactory = rentalDTOFactory;
 	}
 	
-	@RequestMapping(value="/rentals", method=RequestMethod.POST)
+	@RequestMapping(value="/private/rentals", method=RequestMethod.POST)
 	@PostMapping
 	@PreAuthorize("hasRole('USER')")
 	@ApiOperation(value="This method is responsible for a new user rental", notes = "You must be logged on the api to execute this method.")
@@ -68,7 +65,7 @@ public class RentalApi {
 		}
 	}
 	
-	@RequestMapping(value="/giveBacks", method=RequestMethod.PATCH)
+	@RequestMapping(value="/private/giveBacks", method=RequestMethod.PATCH)
 	@PatchMapping
 	@PreAuthorize("hasRole('USER')")
 	@ApiOperation(value="This method is responsible for a rental given back",  notes = "You must be logged on the api to execute this method.")
